@@ -1,0 +1,47 @@
+<section id="nos-actions">
+    <style>
+        .card-nos-actions {
+            transition: transform 0.3s ease;
+        }
+
+        .card-nos-actions:hover {
+            transform: scale(1.1); /* Agrandir la carte de 10% */
+            background-color: #032b43; /* Couleur de fond bleue */
+        }
+    </style>
+
+    <div id="tete-nos-actions">
+        <h2 class="pb-4">
+            Nos actions
+        </h2>
+        <p>The social, cultural, technological and environmental problems in which we are committing ourselves every day to achieve better results and sustainable development that allows us to provide a better quality of life to thousands of communities around the world.</p>
+    </div>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', (event) => {
+            // Sélectionnez toutes les cartes et ajoutez des écouteurs d'événements pour le survol de la souris
+            document.querySelectorAll('.card-nos-actions').forEach(card => {
+                card.addEventListener('mouseover', () => {
+                    card.classList.add('hovered');
+                });
+
+                card.addEventListener('mouseout', () => {
+                    card.classList.remove('hovered');
+                });
+            });
+        });
+    </script>
+
+    {% for action in actions %}
+        {% if loop.index % 4 == 1 %}
+            </div><div class="row justify-content-center">
+        {% endif %}
+            
+        <div class="card card-nos-actions" >
+            <div class="card-body">
+                <h4 class="card-title h5 h4-sm">{{ action.titre }}</h4>
+                <p class="card-text">{{ action.description|striptags|raw }}</p>
+            </div>
+        </div>
+    {% endfor %}
+</section>

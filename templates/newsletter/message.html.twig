@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Confirmation Message{% endblock %}
+
+{% block body %}
+&nbsp;
+&nbsp;
+<div class="container">
+    <div class="row justify-content-center mt-5">
+        <div class="col-md-8">
+            <div class="card">
+                {% if messageType == 'success' %}
+                    <div class="card-header bg-success text-white">Success</div>
+                {% elseif messageType == 'error' %}
+                    <div class="card-header bg-danger text-white">Error</div>
+                {% elseif messageType == 'info' %}
+                    <div class="card-header bg-info text-white">Info</div>
+                {% endif %}
+                <div class="card-body">
+                    <p>{{ message }}</p>
+                </div>
+                {% if autoRedirect %}
+                    <div class="card-footer">
+                        <small>You will be redirected in a few seconds...</small>
+                    </div>
+                    <script>
+                        setTimeout(function() {
+                            window.location.href = "{{ path('app_home') }}";
+                        }, 5000); // 5000 milliseconds = 5 seconds
+                    </script>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+&nbsp;
+&nbsp;
+{% endblock %}

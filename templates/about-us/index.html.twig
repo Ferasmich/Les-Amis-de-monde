@@ -1,0 +1,96 @@
+{% extends 'base.html.twig' %}
+{% block title %}
+	A propos
+{% endblock %}
+
+{% block body %}
+
+	<script>
+		document.addEventListener('DOMContentLoaded', (event) => {
+let observer;
+let options = {
+root: null, // utilise le viewport comme zone de visibilité
+rootMargin: '0px',
+threshold: 0.1 // déclenche l'observer quand 10% de l'élément est visible
+};
+
+observer = new IntersectionObserver(handleIntersect, options);
+
+// Sélectionner tous les éléments à observer
+document.querySelectorAll('.card-about-us').forEach(section => {
+observer.observe(section);
+});
+
+function handleIntersect(entries, observer) {
+entries.forEach((entry, index) => {
+if (entry.isIntersecting) { // Ajoute la classe 'is-visible'
+entry.target.classList.add('card-' + (
+index + 1
+));
+}
+});
+}
+});
+	</script>
+
+</head>
+{% for aboutUs in aboutUsImage %}
+
+	<div class="banner" style="background-image: url('{{ asset('upload/' ~ aboutUs.image) }}');">
+		<h1 class="center-p">A propos de nous</h1>
+	</div>
+
+{% endfor %}
+
+
+<div class="card-container">
+	{% for aboutus in aboutUs %}
+		<div class="card-about-us">
+			<a href="#{{ aboutus.titre }}" class="disable-link">
+				<h2>{{ aboutus.titre }}</h2>
+				<div class="about-us-p">{{ aboutus.contenu|raw }}</div>
+			</a>
+		</div>
+
+
+	{% endfor %}
+
+
+</div>
+{% for aboutus in aboutUs %}
+	{% if loop.index % 2 == 1 %}
+		<div class="section" id="{{ aboutus.titre }}">
+			<h2 class="about-us-title ">{{ aboutus.titre }}</h2>
+			<div class="flex-container">
+				<div class="flex-item text-content class padding-right">
+					<div class="text-width">
+						<p>{{ aboutus.contenu|raw }}</p>
+					</div>
+				</div>
+				<div class="flex-item">
+					<img src="{{ asset('upload/' ~ aboutus.image) }}" alt="Notre Histoire" class="image-about">
+				</div>
+			</div>
+		</div>
+
+	{% endif %}
+	{% if loop.index % 2 == 0 %}
+		<!-- Que faisons-nous ? -->
+		<div class="section" id="{{ aboutus.titre }}">
+			<h2 class="about-us-title animate__animated animate__backInRight " id="what-do-we-do">{{ aboutus.titre }}</h2>
+			<div class="flex-container">
+				<div class="flex-item">
+					<img src="{{ asset('upload/' ~ aboutus.image) }}" alt="Notre Histoire" class="image-about">
+				</div>
+				<div class="flex-item text-content class padding-right">
+					<div class="text-width">
+						<p class="text-width">{{ aboutus.contenu|raw }}</p>
+					</div>
+
+				</div>
+			</div>
+		</div>
+
+	{% endif %}
+
+{% endfor %}{% endblock %}

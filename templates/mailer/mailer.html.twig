@@ -1,0 +1,84 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}mailer{% endblock %}
+
+{% block stylesheets %}
+  {{ parent() }}
+  <style>
+    .container {
+      margin-top: 5px; /* Adjust margin-top as needed */
+    }
+    .form-container {
+      background-color: #f9f9f9;
+      padding: 20px;
+      border-radius: 10px;
+      text-align: center;
+    }
+    .form-group {
+      margin-bottom: 20px; /* Add space between form elements */
+      text-align: left; /* Align text to the left */
+    }
+    .button {
+      margin-bottom: 20px; /* Add space between form elements */
+    }
+  </style>
+{% endblock %}
+
+{% block body %}
+  &nbsp;
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-6 form-container">
+
+        <h2> Send Email to Clients </h2>
+
+        {% for message in app.flashes('success') %}
+        <div id="success-message" class="alert alert-success">{{ message }}</div>
+        {% endfor %}
+
+        {% for message in app.flashes('error') %}
+        <div id="success-message" class="alert alert-danger">{{ message }}</div>
+        {% endfor %}
+
+        {{ form_start(form) }}
+
+        <div class="form-group">
+          {{ form_label(form.sendTo, 'Send To') }}
+          {{ form_widget(form.sendTo, {'attr': {'class': 'form-control'}}) }}
+        </div>
+        <div class="form-group">
+          {{ form_label(form.template, 'Template') }}
+          {{ form_widget(form.template, {'attr': {'class': 'form-control'}}) }}
+        </div>
+        <div class="form-group">
+          {{ form_label(form.subject, 'Subject') }}
+          {{ form_widget(form.subject, {'attr': {'class': 'form-control'}}) }}
+        </div>
+        <div class="form-group">
+          {{ form_label(form.body, 'Email content') }}
+          {{ form_widget(form.body, {'attr': {'class': 'form-control' , 'rows': 10}}) }}
+        </div>
+        <div class="form-group">
+          {{ form_label(form.attachment) }}
+          {{ form_widget(form.attachment, {'attr': {'class': 'form-control'}}) }}
+        </div>
+        <div class="button">
+          {{ form_widget(form.submit, {'attr': {'class': 'btn btn-primary'}}) }}
+        </div>
+        {{ form_end(form) }}
+      </div>
+    </div>
+  </div>
+  &nbsp;
+
+  <script>
+    // Hide the success message after 2 seconds
+    setTimeout(function() {
+      var successMessage = document.getElementById('success-message');
+      if (successMessage) {
+        successMessage.style.display = 'none';
+      }
+    }, 5000);
+  </script>
+
+{% endblock %}

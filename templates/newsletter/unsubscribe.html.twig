@@ -1,0 +1,73 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Newsletter{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <style>
+        .container {
+            margin-top: 5px; /* Adjust margin-top as needed */
+        }
+        .form-container {
+            background-color: #f9f9f9;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+        }
+        .form-group {
+            margin-bottom: 20px; /* Add space between form elements */
+            text-align: left; /* Align text to the left */
+        }
+        .button {
+            margin-bottom: 20px; /* Add space between form elements */
+        }
+    </style>
+{% endblock %}
+
+{% block body %}
+    &nbsp;
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-6 form-container">
+                <h2> SE DESABONNER </h2>
+                <p> Veuillez indiquer le motif de désabonnement pour notre amélioration dans la newsletter </p>
+
+                {% for message in app.flashes('success') %}
+                <div id="message" class="alert alert-success">{{ message }}</div>
+                {% endfor %}
+                {% for message in app.flashes('info') %}
+                <div id="message" class="alert alert-success">{{ message }}</div>
+                {% endfor %}
+                {% for message in app.flashes('error') %}
+                <div id="message" class="alert alert-danger">{{ message }}</div>
+                {% endfor %}
+
+                {{ form_start(form) }}
+                <div class="form-group">
+                    {{ form_label(form.email, 'Email') }}
+                    {{ form_widget(form.email, {'attr': {'class': 'form-control', 'readonly': 'readonly'}}) }}
+                </div>
+                <div class="form-group">
+                    {{ form_label(form.unsubscribeReason, 'Reason') }}
+                    {{ form_widget(form.unsubscribeReason, {'attr': {'class': 'form-control', 'rows': 4}}) }}
+                </div>
+                <div class="button">
+                    {{ form_widget(form.submit, {'attr': {'class': 'btn btn-primary'}}) }}
+                </div>
+                {{ form_end(form) }}
+            </div>
+        </div>
+    </div>
+    &nbsp;
+
+  <script>
+    // Hide the success message after 2 seconds
+    setTimeout(function() {
+      var successMessage = document.getElementById('message');
+      if (successMessage) {
+        successMessage.style.display = 'none';
+      }
+    }, 3000);
+  </script>
+
+{% endblock %}

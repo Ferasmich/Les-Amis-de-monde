@@ -1,0 +1,88 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Les amis du monde - Contact{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <style>
+
+    </style>
+{% endblock %}
+
+{% block body %}
+
+<div id="contact-banner">  
+    <div>
+        <h1>CONTACTEZ NOUS</h1>
+        <p>lorem ipsum</p>
+    </div>
+</div>
+
+&nbsp;
+<div class="card mb-6 mx-3">
+  <div class="row no-gutters">
+
+    <div class="col-md-5">
+      <div class="card-body">
+        <h3 class="card-title d-flex justify-content-center"> CONTACTEZ NOUS </h3>
+        <p class="card-text">        
+        {% for message in app.flashes('success') %}
+                <div id="success-message" class="alert alert-success">{{ message }}</div>
+                {% endfor %}
+
+                {{ form_start(form) }}
+                <div class="form-group px-1 py-1">
+                    {{ form_label(form.nom, 'Nom') }}
+                    {{ form_widget(form.nom, {'attr': {'class': 'form-control'}}) }}
+                </div>
+                <div class="form-group px-1 py-1">
+                    {{ form_label(form.prenom, 'Prénom') }}
+                    {{ form_widget(form.prenom, {'attr': {'class': 'form-control'}}) }}
+                </div>
+                <div class="form-group px-1 py-1">
+                    {{ form_label(form.email, 'Email') }}
+                    {{ form_widget(form.email, {'attr': {'class': 'form-control'}}) }}
+                </div>
+                <div class="form-group px-1 py-1">
+                    {{ form_label(form.sujet, 'Sujet') }}
+                    {{ form_widget(form.sujet, {'attr': {'class': 'form-control'}}) }}
+                </div>
+                <div class="form-group px-1 py-1">
+                    {{ form_label(form.message, 'Message') }}
+                    {{ form_widget(form.message, {'attr': {'class': 'form-control' , 'rows': '5'}}) }}
+                </div>
+                &nbsp;
+                <div class="button d-flex justify-content-center">
+                    {{ form_widget(form.submit, {'attr': {'class': 'btn btn-primary'}}) }}
+                </div>
+                {{ form_end(form) }}
+        </p>
+      </div>
+    </div>
+
+    <div class="col-md-7">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d5244.495706961584!2d2.2346679764533093!3d48.91066989702597!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47e665b2daba8e0f%3A0xe85219f7f0bdb82d!2s24%20Rue%20Colbert%2C%2092700%20Colombes!5e0!3m2!1sen!2sfr!4v1714378943380!5m2!1sen!2sfr" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        <div class="d-flex justify-content-center">
+            <p class="px-3 py-3 text-sm-start"> <i class="fas fa-phone"></i>
+                <a href="tel:0123456789">01 23 45 67 89</a>
+            </p>
+            <p class="px-3 py-3"> <i class="far fa-envelope me-1"></i>
+                <a href="mailto:Example@gmail.com">Example@gmail.com</a>
+            </p>            
+        </div>           
+    </div>
+
+  </div>  
+</div>
+
+    <script>
+        // Hide the success message after 2 seconds
+        setTimeout(function() {
+            var successMessage = document.getElementById('success-message');
+            if (successMessage) {
+                successMessage.style.display = 'none';
+            }
+        }, 3000);
+    </script>
+
+{% endblock %}

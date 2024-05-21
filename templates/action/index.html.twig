@@ -1,0 +1,44 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+    
+<div class="row">
+    <div class="col-2">
+    {% include 'fragment/_sidebar.html.twig'  %}
+    </div>
+    <div class="col-10">
+        <h1 class="titreh1 text-center mb-5 mt-5">GÉRER LES ACTIONS</h1>
+        <div class="text-center">
+            <a href="{{path("new_action")}}" class="btn btn-ajouter fw-bold
+            ">Ajouter une action</a>
+        </div>
+        <div class="table-container table-responsive">
+            <table class="table table-striped align-middle ">
+                <thead>
+                    <tr>
+                        <th>id</th>
+                        <th>Titre</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for key, value in actions %}
+                    <tr>
+                        <td>{{value.id}}</td>
+                        <td>{{value.titre}}</td>
+                        
+                        <td>
+                            <a href="{{path("update_action", {id: value.id})}}", class="btn btn-modifier">Modifier</a>
+                            <a href="{{path("delete_action", {id: value.id})}}", class="btn btn-supprimer">Supprimer</a> 
+                        </td> 
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+

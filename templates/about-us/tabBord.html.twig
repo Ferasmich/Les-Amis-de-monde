@@ -1,0 +1,50 @@
+<section class='art' id='apropos'>
+	<h2 class="my-3 text-center text-uppercase">Gerer les aboutUs</h2>
+	<div class="adTable table-responsive-sm d-flex justify-content-center">
+		<table class="aTable table">
+			<thead class="">
+				<tr class="">
+					<th>Date</th>
+					<th>Titre</th>
+					<th>Auteur</th>
+					<th>Type</th>
+					<th>Image
+					</th>
+					<th class='ico'>actions</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for aboutUs in aboutUs %}
+					<tr>
+
+						<td>{{ aboutUs.date ? aboutUs.date|date('Y-m-d') : '' }}</td>
+						<td>{{ aboutUs.titre }}</td>
+						<td>{{ aboutUs.auteur }}</td>
+						<td>{{ aboutUs.type }}</td>
+						<td>
+							<img src="{{ asset('upload/' ~ aboutUs.image) }}" alt="Notre Histoire" class="image-about-bord">
+						</td>
+
+						<td class="ico">
+							<a class="btn btn-success py-1 px-2" href="{{path("update_aboutUs", {id: aboutUs.id})}}">
+								<i class="visu2 fa-solid fa-pen-to-square"></i>
+							</a>
+							<a class="btn btn-danger py-1 px-2" href="{{path("delete_aboutus", {id: aboutUs.id})}}">
+								<i class="fa-solid fa-trash"></i>
+							</a>
+						</td>
+					</tr>
+				{% else %}
+					<tr>
+						<td colspan="8">Aucun ajout trouvé</td>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+	</div>
+	{# <a href="{{ path('new_aboutUs') }}" class='d-flex justify-content-center'>
+													<span class="btn btn-warning">
+														+ Ajouter un aboutUs
+													</span>
+												</a> #}
+</section>

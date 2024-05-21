@@ -1,0 +1,15 @@
+:root {
+    --footer-1-color: #78a3b1;
+    --footer-2-color: #032B43 ;
+    --bouton-don: #FFC436;
+    --bouton-autre: #F88600;
+    --text-1: #ffff;
+    --text-2: #A1A1A1;
+}
+
+.card-nos-actions{
+    width:18rem !important;
+    border-radius: 5% !important;
+    padding:15px !important;
+    margin: 10px !important;
+}
